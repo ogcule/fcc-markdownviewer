@@ -1,0 +1,23 @@
+{
+  "name": "fcc-markdownviewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogcule/fcc-markdownviewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ogcule/fcc-markdownviewer/issues"
+  },
+  "homepage": "https://github.com/ogcule/fcc-markdownviewer#readme",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
