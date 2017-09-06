@@ -1,0 +1,20 @@
+$bg : blue;
+$text : white;
+body{
+  background: url(http://res.cloudinary.com/deyh3ywme/image/upload/v1504001961/markdown-bg_e62gma.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-color: $bg;
+  color: $text;
+}
+main{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+section{
+  height: 60%;
+  width: 30%;
+  border-color: white;
+}

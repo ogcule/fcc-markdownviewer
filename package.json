@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ogcule/fcc-markdownviewer#readme",
   "devDependencies": {
     "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "react": "^15.6.1"
   }
 }
