@@ -15,7 +15,10 @@
   "author": "",
   "license": "ISC",
   "babel": {
-    "presets": ["env", "react"]
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "bugs": {
     "url": "https://github.com/ogcule/fcc-markdownviewer/issues"
@@ -33,6 +36,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "marked": "^0.3.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   }
