@@ -2,7 +2,7 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 let PropTypes = require('prop-types');
 let marked = require('marked');
-require('./index.min.css');
+require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
 class MarkdownViewer extends React.Component{
   render(){
     return(
