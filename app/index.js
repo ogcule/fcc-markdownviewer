@@ -29,7 +29,7 @@ class MarkdownViewer extends React.Component{
             <a
               href="http://olivercule.com"
               target="_blank"
-              >Oliver Cule<img
+              > Oliver Cule<img
                 src="http://res.cloudinary.com/deyh3ywme/image/upload/v1505078888/oc-final_yerb3t.png"/>
               </a>
             </footer>
