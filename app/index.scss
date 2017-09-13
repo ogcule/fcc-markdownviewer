@@ -97,8 +97,6 @@ section{
     padding: 7px;
     border-radius: 5px;
     color: $text-viewer;
-    //overflowing text goes on newline
-    word-wrap: break-word;
     overflow: auto;
 }
 .markdown-form{
@@ -139,7 +137,7 @@ section{
     transition: transform 2s;
     &:hover{
       background-color: brown;
-      transform: rotateY(360deg);
+      transform: rotateX(10deg);
     }
     &:focus{
       outline: none;

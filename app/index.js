@@ -4,36 +4,41 @@ let PropTypes = require('prop-types');
 let marked = require('marked');
 require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
 
-class Nav extends React.Component{
-  render(){
-    return(
-    <nav>
-        <h1>Markdown Viewer</h1>
-        <div>
-          <button onClick="">Markdown</button>
-          <button>Editor</button>
-          <button>dual</button>
-        </div>
-    </nav>
-    )
-  }
-}
 class MarkdownViewer extends React.Component{
   render(){
     return(
       <div>
-        <Nav />
-        <div className="main-container">
-          <MarkDownInputForm />
-          <footer>Coded by
-            <a
-              href="http://olivercule.com"
-              target="_blank"
-              > Oliver Cule<img
-                src="http://res.cloudinary.com/deyh3ywme/image/upload/v1505078888/oc-final_yerb3t.png"/>
-              </a>
-            </footer>
+       <nav>
+        <h1>Markdown Viewer</h1>
+          <div>
+            <button>Markdown</button>
+            <button>Editor</button>
+            <button>dual</button>
           </div>
+        </nav>
+          <MarkDownInputForm />
+       </div>
+    )
+  }
+}
+function Footer(){
+  return(
+    <footer>Coded by
+      <a
+        href="http://olivercule.com"
+        target="_blank"
+        > Oliver Cule<img
+          src="http://res.cloudinary.com/deyh3ywme/image/upload/v1505078888/oc-final_yerb3t.png"/>
+        </a>
+      </footer>
+  )
+}
+class App extends React.Component{
+  render(){
+    return(
+      <div className="main-container">
+        <MarkdownViewer />
+        <Footer />
       </div>
       )
   }
@@ -135,7 +140,8 @@ class BrowserViewer extends React.Component {
     );
   }
 }
+
 ReactDOM.render(
-  <MarkdownViewer />,
+  <App />,
   document.getElementById('root')
 );
