@@ -3,12 +3,37 @@ let ReactDOM = require('react-dom');
 let PropTypes = require('prop-types');
 let marked = require('marked');
 require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
+
+class Nav extends React.Component{
+  render(){
+    return(
+    <nav>
+        <h1>Markdown Viewer</h1>
+        <div>
+          <button onClick="">Markdown</button>
+          <button>Editor</button>
+          <button>dual</button>
+        </div>
+    </nav>
+    )
+  }
+}
 class MarkdownViewer extends React.Component{
   render(){
     return(
       <div>
-        <header>Markdown Viewer</header>
+        <Nav />
+        <div className="main-container">
           <MarkDownInputForm />
+          <footer>Coded by
+            <a
+              href="http://olivercule.com"
+              target="_blank"
+              >Oliver Cule<img
+                src="http://res.cloudinary.com/deyh3ywme/image/upload/v1505078888/oc-final_yerb3t.png"/>
+              </a>
+            </footer>
+          </div>
       </div>
       )
   }
@@ -17,22 +42,22 @@ class MarkDownInputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      markdownText: ''
     };
     this._handleChange = this._handleChange.bind(this);
     this._handleClick = this._handleClick.bind(this);
     this._clearClick = this._clearClick.bind(this);
   }
-  _clearClick(e){
-    e.preventDefault();
-    this.setState({value:""});
+  _clearClick(event){
+    event.preventDefault();
+    this.setState({markdownText:""});
   }
   _handleChange(event) {
-    this.setState({value: event.target.value})
+    this.setState({markdownText: event.target.value})
   }
-  _handleClick(e) {
-    e.preventDefault();
-    this.setState({value:
+  _handleClick(event) {
+    event.preventDefault();
+    this.setState({markdownText:
     `Heading
 =======
 
@@ -73,15 +98,23 @@ Spain.
      <article>
       <section>
         <form className="markdown-form">
-          <label for='markdown-text'>Text using Markdown syntax</label>
+          <label htmlFor='markdown-text'>Text using Markdown syntax</label>
           <div className="btn-container">
             <button onClick={this._handleClick}>Example text</button>
             <button onClick={this._clearClick}>Clear text</button>
           </div>
-          <textarea id='markdown-text' value={this.state.value} onChange={this._handleChange} placeholder="Enter your Markdown here:" type="text"></textarea>
+          <textarea
+            id='markdown-text'
+            value={this.state.markdownText}
+            onChange={this._handleChange}
+            placeholder="Enter your Markdown here:"
+            type="text">
+            </textarea>
         </form>
       </section>
-      <BrowserViewer textarea={this.state.value}/>
+      <section /*className="display-none"*/>
+        <BrowserViewer textarea={this.state.markdownText}/>
+      </section>
        </article>
        </div>);
   };
@@ -94,13 +127,11 @@ class BrowserViewer extends React.Component {
 }
   render(){
     return(
-      <section>
         <div className="markdown-output">
           <p>Text viewed in browser</p>
           <div className="output-text" dangerouslySetInnerHTML={this.createMarkup()}>
         </div>
         </div>
-      </section>
     );
   }
 }

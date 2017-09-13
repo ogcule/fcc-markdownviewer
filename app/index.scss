@@ -2,6 +2,7 @@
 $bg : #503228;
 $text : white;
 $text-viewer : black;
+$bg-nav: #494949;
 
 //selects all elements and applies padding and border in width, stops overflowing boxes!
 *, *:before, *:after {
@@ -11,6 +12,8 @@ html, body {
   height: 100%;
   width: 100%;
   font-size:16px;
+  margin: 0;
+  padding: 0;
 }
 header {
   font-family: 'Medula One', cursive;
@@ -25,18 +28,54 @@ body{
   color: $text;
   font-family: 'Open Sans', sans-serif;
 }
-article {
-  display:flex;
-  flex-flow: column nowrap;
+nav {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  margin: 0;
+  padding: 0;
+  background-color: $bg-nav;
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  h1{
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    font-family: 'Medula One', cursive;
+  }
 }
+.main-container{
+  min-height: 100vh; //makes container full view to allow sticky footer
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  //align-items: stretch;
+  justify-content: space-between;
+}
+article {
+ margin-top: 50px;
+ padding: 0;
+ width: 100%;
+ display: flex;
+ flex-flow: row nowrap;
+ }
 section{
+  flex-grow: 1 1 auto;
+  width: 100%;
   background-color: #C64212;
   border: 2px solid #DEA438;
   border-radius: 5px;
   padding: 1em;
-  margin: 2em 0.5em 2em 0.5em;
+  margin: 0;
 }
+.display-none{
+    display:none;
+  }
+
 .markdown-output {
   display: flex;
   flex-flow: column nowrap;
@@ -51,6 +90,7 @@ section{
 .output-text {
     background-color: white;
     width: 100%;
+    height: auto;
     flex: 1 0 200px;
     padding: 7px;
     border-radius: 5px;
@@ -104,15 +144,35 @@ section{
     }
   }
 }
+footer{
+  align-self: center;
+  a{
+    color: #C64212;
+    text-decoration: none;
+    img {
+    margin: 0 0.5em;
+    width: 1.5em;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+  }
+    &:hover >img{
+      color: #DEA438;
+      visibility: visible;
+      opacity: 1;
+  }
+  }
+}
 
 /* mobile first, so this is for larger screens and also for landscape views */
-@media only screen and (min-width: 700px), (orientation: landscape)  {
+@media only screen and (min-width: 700px)  {
   header {
     font-size: 4em;
   }
   article {
     flex-flow: row nowrap;
-    //justify-content: space-around;
+
   }
   section {
     flex: 1 1 300px;
