@@ -4,19 +4,20 @@ let PropTypes = require('prop-types');
 let marked = require('marked');
 require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
 
-class MarkdownViewer extends React.Component{
+class App extends React.Component{
   render(){
     return(
-      <div>
+      <div className="container">
        <nav>
         <h1>Markdown Viewer</h1>
           <div>
             <button>Markdown</button>
             <button>Editor</button>
-            <button>dual</button>
+            <button>Dual</button>
           </div>
         </nav>
           <MarkDownInputForm />
+          <Footer />
        </div>
     )
   }
@@ -32,16 +33,6 @@ function Footer(){
         </a>
       </footer>
   )
-}
-class App extends React.Component{
-  render(){
-    return(
-      <div className="main-container">
-        <MarkdownViewer />
-        <Footer />
-      </div>
-      )
-  }
 }
 class MarkDownInputForm extends React.Component {
   constructor(props) {
@@ -99,15 +90,10 @@ Spain.
   }
   render(){
     return (
-      <div>
      <article>
       <section>
         <form className="markdown-form">
-          <label htmlFor='markdown-text'>Text using Markdown syntax</label>
-          <div className="btn-container">
-            <button onClick={this._handleClick}>Example text</button>
-            <button onClick={this._clearClick}>Clear text</button>
-          </div>
+          <label htmlFor='markdown-text'>Markdown</label>
           <textarea
             id='markdown-text'
             value={this.state.markdownText}
@@ -121,7 +107,7 @@ Spain.
         <BrowserViewer textarea={this.state.markdownText}/>
       </section>
        </article>
-       </div>);
+     )
   };
 }
 
@@ -133,7 +119,7 @@ class BrowserViewer extends React.Component {
   render(){
     return(
         <div className="markdown-output">
-          <p>Text viewed in browser</p>
+          <p>Browser view</p>
           <div className="output-text" dangerouslySetInnerHTML={this.createMarkup()}>
         </div>
         </div>
