@@ -4,23 +4,67 @@ let PropTypes = require('prop-types');
 let marked = require('marked');
 require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
 
+function SelectDisplayType(props){
+  const displays= ["Markdown", "Browser", "Dual View"];
+  const activeBtnStyle = {
+    backgroundColor: "#C64212",
+    color: "#ffffff"
+  }
+  return (
+    <ul>
+      {displays.map((display) =>{
+        return(
+          <li
+            key={display}>
+            <button className="btn-select-display"
+              style={display === props.selectedDisplay ? activeBtnStyle : null}
+              onClick={props.updateDisplay.bind(null,display)}
+              >{display}</button>
+          </li>)
+      })}
+    </ul>
+  )
+}
 class App extends React.Component{
+  constructor(props){
+  super(props);
+  this.state = {
+    selectedDisplay: "Dual View"
+  }
+  this.updateDisplay = this.updateDisplay.bind(this);
+  }
+  updateDisplay(display) {
+    this.setState( () => {
+      return {
+        selectedDisplay: display
+      }
+    });
+  }
   render(){
     return(
       <div className="container">
-       <nav>
-        <h1>Markdown Viewer</h1>
-          <div>
-            <button>Markdown</button>
-            <button>Editor</button>
-            <button>Dual</button>
-          </div>
-        </nav>
-          <MarkDownInputForm />
-          <Footer />
-       </div>
+        <Header
+          selectedDisplay={this.state.selectedDisplay}
+          updateDisplay={this.updateDisplay}
+        />
+        <FilteredView
+          selectedDisplay={this.state.selectedDisplay}
+        />
+        <Footer />
+      </div>
     )
   }
+}
+function Header(props){
+  return(
+    <header>
+     <h1>Markdown Viewer</h1>
+       <SelectDisplayType
+         selectedDisplay={props.selectedDisplay}
+         updateDisplay={props.updateDisplay}
+       />
+     </header>
+  )
 }
 function Footer(){
   return(
@@ -34,24 +78,47 @@ function Footer(){
       </footer>
   )
 }
-class MarkDownInputForm extends React.Component {
+class FilteredView extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       markdownText: ''
     };
-    this._handleChange = this._handleChange.bind(this);
-    this._handleClick = this._handleClick.bind(this);
-    this._clearClick = this._clearClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.clearClick = this.clearClick.bind(this);
+
   }
-  _clearClick(event){
-    event.preventDefault();
-    this.setState({markdownText:""});
-  }
-  _handleChange(event) {
+  handleChange(event) {
     this.setState({markdownText: event.target.value})
   }
-  _handleClick(event) {
+  clearClick(event){
+    event.preventDefault();
+    this.setState({markdownText: ""})
+  }
+render(){
+  return(
+    <article>
+    {this.props.selectedDisplay === "Browser" || <MarkDownInputForm
+      selectedDisplay={this.props.selectedDisplay}
+      markdownText={this.state.markdownText}
+      onChange={this.handleChange}/>}
+    {this.props.selectedDisplay === "Markdown"  || <BrowserViewer
+      selectedDisplay={this.props.selectedDisplay}
+      textarea={this.state.markdownText}/>}
+  </article>
+  )
+}
+}
+function Clear(props){
+  return (
+    <button
+     className="btn-clear"
+     onClick={props.ClearClick}
+      ></button>
+  )
+}
+/*class Options extends React.Component{
+  handleClick(event) {
     event.preventDefault();
     this.setState({markdownText:
     `Heading
@@ -89,24 +156,26 @@ Spain.
  *[Herman Fassett](https://freecodecamp.com/hermanfassett)*`  })
   }
   render(){
+    return(
+    )
+  }
+}*/
+class MarkDownInputForm extends React.Component {
+  render(){
     return (
-     <article>
-      <section>
+      <section style={this.props.selectedDisplay === "Markdown" ? {maxWidth: "100%" , flex: "1 1 100%"} : null}>
+        <Clear className="btn-clear" clearCLick={this.clearClick}/>
         <form className="markdown-form">
           <label htmlFor='markdown-text'>Markdown</label>
           <textarea
             id='markdown-text'
-            value={this.state.markdownText}
-            onChange={this._handleChange}
+            value={this.props.markdownText}
+            onChange={this.props.onChange}
             placeholder="Enter your Markdown here:"
             type="text">
             </textarea>
         </form>
       </section>
-      <section /*className="display-none"*/>
-        <BrowserViewer textarea={this.state.markdownText}/>
-      </section>
-       </article>
      )
   };
 }
@@ -118,11 +187,13 @@ class BrowserViewer extends React.Component {
 }
   render(){
     return(
+      <section style={this.props.selectedDisplay === "Browser" ? {maxWidth: "100%", flex: "1 1 100%"} : null}>
         <div className="markdown-output">
           <p>Browser view</p>
           <div className="output-text" dangerouslySetInnerHTML={this.createMarkup()}>
         </div>
         </div>
+      </section>
     );
   }
 }

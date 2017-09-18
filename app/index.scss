@@ -5,7 +5,7 @@ $text-viewer : black;
 $bg-nav: #494949;
 
 //selects all elements and applies padding and border in width, stops overflowing boxes!
-*, *:before, *:after {
+*, *:before, *:after, ul, li {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -22,22 +22,37 @@ body{
   color: $text;
   font-family: 'Open Sans', sans-serif;
 }
+ul{
+  list-style-type: none;
+}
+li{
+  display:inline;
+}
 button{
  -webkit-appearance: none; //remote safari defaults
   border-radius: 0;
   border-style: none;
+  font-family: 'Open Sans', sans-serif;
+}
+.btn-select-display{
   border: 1px solid #DEA438;
   background-color: $bg;
-  color: white;
+  color: #bfbfbf;
   padding: 2px;
-  font-family: 'Open Sans', sans-serif;
+}
+.btn-clear{
+  border: none;
+  background: url('/../img/close-icon.png') center no-repeat;
+  background-size: contain;
+  height: 15px;
+  width: 15px;
 }
 .container{
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
 }
-nav {
+header {
   padding: 0 1em;
   flex: 0.1 1 auto;
   background-color: $bg-nav;
@@ -138,11 +153,8 @@ footer{
 
 /* mobile first, so this is for larger screens and also for landscape views */
 @media only screen and (min-width: 700px)  {
-  header {
-    font-size: 4em;
-  }
   section {
-    min-width:40%;
+      min-width: 40%;
     margin: 5%;
   }
 }
