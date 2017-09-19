@@ -68,7 +68,7 @@ function Header(props){
 }
 function Footer(){
   return(
-    <footer>Coded by
+    <footer>Brought to you by
       <a
         href="http://olivercule.com"
         target="_blank"
@@ -85,40 +85,17 @@ class FilteredView extends React.Component{
       markdownText: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.clearClick = this.clearClick.bind(this);
-
+    this.buttonClickClear = this.buttonClickClear.bind(this);
+    this.buttonClickExample =   this.buttonClickExample.bind(this);
   }
   handleChange(event) {
     this.setState({markdownText: event.target.value})
   }
-  clearClick(event){
+  buttonClickClear(event){
     event.preventDefault();
     this.setState({markdownText: ""})
   }
-render(){
-  return(
-    <article>
-    {this.props.selectedDisplay === "Browser" || <MarkDownInputForm
-      selectedDisplay={this.props.selectedDisplay}
-      markdownText={this.state.markdownText}
-      onChange={this.handleChange}/>}
-    {this.props.selectedDisplay === "Markdown"  || <BrowserViewer
-      selectedDisplay={this.props.selectedDisplay}
-      textarea={this.state.markdownText}/>}
-  </article>
-  )
-}
-}
-function Clear(props){
-  return (
-    <button
-     className="btn-clear"
-     onClick={props.ClearClick}
-      ></button>
-  )
-}
-/*class Options extends React.Component{
-  handleClick(event) {
+  buttonClickExample(event) {
     event.preventDefault();
     this.setState({markdownText:
     `Heading
@@ -155,18 +132,46 @@ Spain.
 
  *[Herman Fassett](https://freecodecamp.com/hermanfassett)*`  })
   }
-  render(){
-    return(
-    )
-  }
-}*/
+render(){
+  return(
+    <article>
+    {this.props.selectedDisplay === "Browser" || <MarkDownInputForm
+      buttonClickExample={this.buttonClickExample}
+      buttonClickClear={this.buttonClickClear}
+      selectedDisplay={this.props.selectedDisplay}
+      markdownText={this.state.markdownText}
+      onChange={this.handleChange}/>}
+    {this.props.selectedDisplay === "Markdown"  || <BrowserViewer
+      selectedDisplay={this.props.selectedDisplay}
+      textarea={this.state.markdownText}/>}
+  </article>
+  )
+}
+}
+function Clear(props) {
+  return (
+    <button
+     className="btn-clear"
+     onClick={props.buttonClickClear.bind(this)}
+      ></button>
+  )
+}
+function Example(props){
+  return(
+    <button
+      className="btn-example"
+      onClick={props.buttonClickExample.bind(this)}></button>)
+}
 class MarkDownInputForm extends React.Component {
   render(){
     return (
       <section style={this.props.selectedDisplay === "Markdown" ? {maxWidth: "100%" , flex: "1 1 100%"} : null}>
-        <Clear className="btn-clear" clearCLick={this.clearClick}/>
         <form className="markdown-form">
+          <div className="markdown-header">
+          <Example buttonClickExample={this.props.buttonClickExample}/>
           <label htmlFor='markdown-text'>Markdown</label>
+          <Clear buttonClickClear={this.props.buttonClickClear}/>
+          </div>
           <textarea
             id='markdown-text'
             value={this.props.markdownText}

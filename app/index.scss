@@ -41,11 +41,21 @@ button{
   padding: 2px;
 }
 .btn-clear{
-  border: none;
+  border: 1px solid #494949;
+  border-radius: 2px;
   background: url('/../img/close-icon.png') center no-repeat;
-  background-size: contain;
-  height: 15px;
-  width: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.btn-example{
+  border: none;
+  border-radius: 2px;
+  background: url('/../img/MD-icon.png') center no-repeat;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
 }
 .container{
   height: 100vh;
@@ -114,8 +124,6 @@ section{
   color: $text-viewer;
    @extend %inner-flex;
   label{
-    flex: 0.1 1 auto;
-    text-align: center;
     font-size: 1em;
     color: $text;
   }
@@ -129,6 +137,11 @@ section{
     overflow: auto;
   }
 }
+.markdown-header{
+  flex: 0.1 1 auto;
+  display: flex;
+  justify-content:space-between;
+ }
 footer{
   flex: 0.1 1 auto;
   align-self: center;
