@@ -33,6 +33,7 @@ button{
   border-radius: 0;
   border-style: none;
   font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
 }
 .btn-select-display{
   border: 1px solid #DEA438;
@@ -47,13 +48,11 @@ button{
   background-color: rgba(0, 0, 0, 0.1);
   height: 24px;
   width: 24px;
-  cursor: pointer;
 }
 .btn-example{
   border: none;
   border-radius: 2px;
   background: url('/../img/MD-icon.png') center no-repeat;
-  cursor: pointer;
   height: 24px;
   width: 24px;
 }
@@ -63,7 +62,7 @@ button{
   flex-flow: column nowrap;
 }
 header {
-  padding: 0 1em;
+  padding: 0.3em 1em;
   flex: 0.1 1 auto;
   background-color: $bg-nav;
   display: flex;
@@ -124,7 +123,6 @@ section{
   color: $text-viewer;
    @extend %inner-flex;
   label{
-    padding: 0 30% 0 30%;
     font-size: 1em;
     color: $text;
   }
@@ -141,7 +139,7 @@ section{
 .markdown-header{
   flex: 0.1 1 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
  }
 footer{
   flex: 0.1 1 auto;

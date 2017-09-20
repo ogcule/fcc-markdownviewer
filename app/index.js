@@ -155,6 +155,7 @@ render(){
 function Clear(props) {
   return (
     <button
+     style= {!props.markdownText ? {visibility: "hidden"} : null}
      className="btn-clear"
      onClick={props.buttonClickClear.bind(this)}
       ></button>
@@ -174,7 +175,8 @@ class MarkDownInputForm extends React.Component {
           <div className="markdown-header">
           <Example buttonClickExample={this.props.buttonClickExample}/>
           <label htmlFor='markdown-text'>Markdown</label>
-            {this.props.markdownText && <Clear  buttonClickClear={this.props.buttonClickClear}/>}
+          <Clear markdownText={this.props.markdownText}
+                 buttonClickClear={this.props.buttonClickClear}/>
           </div>
           <textarea
             id='markdown-text'
