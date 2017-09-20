@@ -124,6 +124,7 @@ section{
   color: $text-viewer;
    @extend %inner-flex;
   label{
+    padding: 0 30% 0 30%;
     font-size: 1em;
     color: $text;
   }
@@ -140,7 +141,7 @@ section{
 .markdown-header{
   flex: 0.1 1 auto;
   display: flex;
-  justify-content:space-between;
+  justify-content: center;
  }
 footer{
   flex: 0.1 1 auto;

@@ -25,6 +25,10 @@ function SelectDisplayType(props){
     </ul>
   )
 }
+SelectDisplayType.propTypes = {
+  selectedDisplay: PropTypes.string.isRequired,
+  updateDisplay: PropTypes.func.isRequired
+}
 class App extends React.Component{
   constructor(props){
   super(props);
@@ -170,7 +174,7 @@ class MarkDownInputForm extends React.Component {
           <div className="markdown-header">
           <Example buttonClickExample={this.props.buttonClickExample}/>
           <label htmlFor='markdown-text'>Markdown</label>
-          <Clear buttonClickClear={this.props.buttonClickClear}/>
+            {this.props.markdownText && <Clear  buttonClickClear={this.props.buttonClickClear}/>}
           </div>
           <textarea
             id='markdown-text'
