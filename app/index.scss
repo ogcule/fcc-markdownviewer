@@ -4,11 +4,8 @@ $text : white;
 $text-viewer : black;
 $bg-nav: #494949;
 
-//selects all elements and applies padding and border in width, stops overflowing boxes!
-*, *:before, *:after, ul, li {
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 html, body {
   height: 100%;
@@ -16,17 +13,21 @@ html, body {
   font-size:16px;
 }
 body{
+  margin: 0;
+  padding: 0;
   background: url(http://res.cloudinary.com/deyh3ywme/image/upload/v1504001961/markdown-bg_e62gma.jpg) no-repeat center center fixed;
   background-size: cover;
   background-color: $bg;
   color: $text;
   font-family: 'Open Sans', sans-serif;
 }
+.display-list{
 ul{
   list-style-type: none;
 }
 li{
   display:inline;
+}
 }
 button{
  -webkit-appearance: none; //remote safari defaults
@@ -44,7 +45,7 @@ button{
 .btn-clear{
   border: 1px solid #494949;
   border-radius: 2px;
-  background: url('/../img/close-icon.png') center no-repeat;
+  background: url('http://res.cloudinary.com/deyh3ywme/image/upload/v1505938240/close-icon_qxtkry.png') center no-repeat;
   background-color: rgba(0, 0, 0, 0.1);
   height: 24px;
   width: 24px;
@@ -52,7 +53,7 @@ button{
 .btn-example{
   border: none;
   border-radius: 2px;
-  background: url('/../img/MD-icon.png') center no-repeat;
+  background: url('http://res.cloudinary.com/deyh3ywme/image/upload/v1505938240/MD-icon_hwauv2.png') center no-repeat;
   height: 24px;
   width: 24px;
 }
@@ -62,15 +63,16 @@ button{
   flex-flow: column nowrap;
 }
 header {
-  padding: 0.3em 1em;
+  padding: 0;
   flex: 0.1 1 auto;
   background-color: $bg-nav;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  min-height: 60px;
   h1{
-    font-size: 2em;
+    font-size: 2.5em;
     padding: 0;
     margin: 0;
     font-family: 'Medula One', cursive;
@@ -102,22 +104,22 @@ section{
 }
 .markdown-output {
   @extend %inner-flex;
-  p{
-    text-align: center;
+  .header{
     flex: 0.1 1 auto;
+    max-height: 30px;
     font-size: 1em;
+    margin: 0;
+    padding: 0 0 1em 0;
+    text-align: center;
   }
 }
 .output-text {
     flex: 2 1 auto;
     background-color: white;
-    padding: 7px;
+    padding: 0 7px 0 7px;
     border-radius: 5px;
     color: $text-viewer;
     overflow: auto;
-    p{
-      text-align: left;
-    }
 }
 .markdown-form{
   color: $text-viewer;
@@ -129,7 +131,7 @@ section{
   textarea[type='text']{
     flex: 2 1 auto;
     font-family: 'Open Sans', sans-serif;
-    padding: 7px;
+    padding: 20px 7px 0 7px;
     border: none;
     border-radius: 5px;
     resize: none;
@@ -140,6 +142,7 @@ section{
   flex: 0.1 1 auto;
   display: flex;
   justify-content: space-between;
+  max-height: 30px;
  }
 footer{
   flex: 0.1 1 auto;

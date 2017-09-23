@@ -4,6 +4,12 @@ let PropTypes = require('prop-types');
 let marked = require('marked');
 require('./index.min.css'); //using atom to convert SCSS to css, this generates the index.min.css file
 
+
+
+
+let exampleText = 'Heading\n=======\n\nSub-heading\n-----------\n \n### Another deeper heading\n \nParagraphs are separated\nby a blank line.\n\nLeave 2 spaces at the end of a line to do a  \nline break\n\nText attributes *italic*, **bold**, \n`monospace`, ~~strikethrough~~ .\n\nShopping list:\n\n  * apples\n  * oranges\n  * pears\n\nNumbered list:\n\n  1. apples\n  2. oranges\n  3. pears\n\nThe rain---not the reign---in\nSpain.\n\n *[Herman Fassett](https://freecodecamp.com/hermanfassett)*';
+
+
 function SelectDisplayType(props){
   const displays= ["Markdown", "Browser", "Dual View"];
   const activeBtnStyle = {
@@ -11,7 +17,7 @@ function SelectDisplayType(props){
     color: "#ffffff"
   }
   return (
-    <ul>
+    <ul className="display-list">
       {displays.map((display) =>{
         return(
           <li
@@ -24,10 +30,6 @@ function SelectDisplayType(props){
       })}
     </ul>
   )
-}
-SelectDisplayType.propTypes = {
-  selectedDisplay: PropTypes.string.isRequired,
-  updateDisplay: PropTypes.func.isRequired
 }
 class App extends React.Component{
   constructor(props){
@@ -101,40 +103,7 @@ class FilteredView extends React.Component{
   }
   buttonClickExample(event) {
     event.preventDefault();
-    this.setState({markdownText:
-    `Heading
-=======
-
-Sub-heading
------------
-
-### Another deeper heading
-
-Paragraphs are separated
-by a blank line.
-
-Leave 2 spaces at the end of a line to do a
-line break
-
-Text attributes *italic*, **bold**,
-${"`monospace`"}, ~~strikethrough~~ .
-
-Shopping list:
-
-  * apples
-  * oranges
-  * pears
-
-Numbered list:
-
-  1. apples
-  2. oranges
-  3. pears
-
-The rain---not the reign---in
-Spain.
-
- *[Herman Fassett](https://freecodecamp.com/hermanfassett)*`  })
+    this.setState({markdownText: exampleText})
   }
 render(){
   return(
@@ -184,6 +153,7 @@ class MarkDownInputForm extends React.Component {
             onChange={this.props.onChange}
             placeholder="Enter your Markdown here:"
             type="text">
+
             </textarea>
         </form>
       </section>
@@ -192,16 +162,16 @@ class MarkDownInputForm extends React.Component {
 }
 
 class BrowserViewer extends React.Component {
-  createMarkup() {
-  let markUp = marked(this.props.textarea, {sanitize: true});
+  createMarkup(value) {
+  let markUp = marked(value, {sanitize: true});
   return {__html: markUp};
 }
   render(){
     return(
       <section style={this.props.selectedDisplay === "Browser" ? {maxWidth: "100%", flex: "1 1 100%"} : null}>
         <div className="markdown-output">
-          <p>Browser view</p>
-          <div className="output-text" dangerouslySetInnerHTML={this.createMarkup()}>
+          <div className="header">Browser view</div>
+          <div className="output-text" dangerouslySetInnerHTML={this.createMarkup(this.props.textarea)}>
         </div>
         </div>
       </section>
